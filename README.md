@@ -1,113 +1,126 @@
-# FaceNova AI Attendance System
+<h1 align="center">🧠 FaceNova AI Attendance System</h1>
 
-A production-minded face recognition attendance platform with a premium SaaS dashboard, Flask REST + WebSocket backend, React + Tailwind frontend, SQLite persistence, CSV export, and a webcam-driven dataset pipeline.
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&pause=1000&color=00C2FF&center=true&vCenter=true&width=700&lines=AI+Powered+Face+Recognition+System;Real-time+Attendance+Tracking;Flask+%7C+React+%7C+WebSockets;Smart+%26+Scalable+SaaS+Dashboard" />
+</p>
 
-## Stack
+<p align="center">
+  🚀 A <strong>production-ready AI attendance platform</strong> powered by face recognition with a sleek SaaS dashboard. <br/>
+  Built using <strong>Flask</strong>, <strong>React</strong>, and <strong>WebSockets</strong> for real-time performance.
+</p>
 
-- Frontend: React 19, Vite, Tailwind CSS, shadcn-style UI, Framer Motion, React Webcam, TanStack Query, Recharts, Sonner
-- Backend: Flask, Flask-Sock WebSockets, OpenCV, face_recognition, SQLAlchemy, JWT auth
-- Data: SQLite by default, PostgreSQL-ready through `DATABASE_URL`
-- Storage: `dataset/`, `encodings/encodings.pkl`, `attendance/*.csv`
+---
 
-## Features
+## ⚙️ Tech Stack  
 
-- Admin authentication with seeded login
-- Employee dataset creation from webcam captures
-- Batch image capture flow with 24-frame default profile generation
-- Encoding rebuild pipeline to `encodings.pkl`
-- Realtime face recognition over WebSocket frame streaming
-- Live attendance marking with duplicate prevention per day/session
-- Attendance persistence in SQLite and CSV mirrors
-- Premium dashboard with analytics, activity stream, system status, dark/light mode, and responsive layout
+### 🖥️ Frontend  
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
+![Vite](https://img.shields.io/badge/Vite-Fast%20Build-purple?style=for-the-badge)
+![Tailwind](https://img.shields.io/badge/TailwindCSS-Modern-blue?style=for-the-badge)
+![Framer](https://img.shields.io/badge/Framer%20Motion-Animations-black?style=for-the-badge)
 
-## Project Structure
+### 🔧 Backend  
+![Flask](https://img.shields.io/badge/Flask-API-black?style=for-the-badge&logo=flask)
+![WebSockets](https://img.shields.io/badge/WebSockets-RealTime-green?style=for-the-badge)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-red?style=for-the-badge)
 
-```text
-/backend
-/frontend
-/dataset
-/encodings
-/attendance
+### 🧠 AI & Data  
+![face_recognition](https://img.shields.io/badge/face--recognition-AI-blue?style=for-the-badge)
+![SQLite](https://img.shields.io/badge/SQLite-Database-lightgrey?style=for-the-badge)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Ready-blue?style=for-the-badge)
+
+---
+
+## ✨ Features  
+
+✅ AI-based **face recognition attendance**  
+✅ Real-time detection via **WebSocket streaming**  
+✅ 📸 Webcam dataset creation (auto capture 20–30 images)  
+✅ 🧬 Encoding pipeline (`encodings.pkl`)  
+✅ 📊 Premium dashboard with analytics & charts  
+✅ 🔐 Admin authentication (JWT-based)  
+✅ 🗂️ Attendance stored in **SQLite + CSV export**  
+✅ 🌙 Dark/Light mode UI  
+✅ 📱 Fully responsive SaaS-style interface  
+
+---
+
+## 📁 Project Structure  
+
+```bash
+/backend        # Flask API + WebSocket server
+/frontend       # React + Tailwind dashboard
+/dataset        # Captured face images
+/encodings      # Encoded face data
+/attendance     # CSV attendance logs
 ```
 
-## Backend Setup
+---
 
-1. Create and activate a Python virtual environment inside `D:\MyProjects\CodeProjects\backend`.
-2. Install packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Copy environment variables:
-   ```bash
-   copy .env.example .env
-   ```
-4. Start the API server:
-   ```bash
-   python run.py
-   ```
+## 🚀 Getting Started  
 
-The backend runs on `http://localhost:5000`.
+### 🔧 Backend Setup  
 
-## Frontend Setup
+```bash
+cd backend
 
-1. Open `D:\MyProjects\CodeProjects\frontend`.
-2. Install packages:
-   ```bash
-   npm install
-   ```
-   If PowerShell blocks `npm.ps1`, use `npm.cmd install`.
-3. Copy frontend env values:
-   ```bash
-   copy .env.example .env
-   ```
-4. Start the Vite app:
-   ```bash
-   npm run dev
-   ```
-   If needed in PowerShell, use `npm.cmd run dev`.
+python -m venv venv
+venv\Scripts\activate
 
-The frontend runs on `http://localhost:5173`.
+pip install -r requirements.txt
 
-## Default Admin Login
+copy .env.example .env
 
-- Email: `admin@facenova.ai`
-- Password: `Admin@123`
+python run.py
+```
 
-Change these in `backend/.env` before production use.
+🌐 Backend runs on: `http://localhost:5000`
 
-## First Run Workflow
+---
 
-1. Start backend and frontend.
-2. Sign in with the seeded admin account.
-3. Open the Dataset page.
-4. Enter the employee name, code, and optional department.
-5. Click `Auto Capture` and collect 20 to 30 images.
-6. Click `Save Person`.
-7. Click `Rebuild Encodings`.
-8. Return to Dashboard and click `Start Scan`.
-9. Recognized faces will appear in the live preview and attendance ledger automatically.
+### 🎨 Frontend Setup  
 
-## Production Notes
+```bash
+cd frontend
 
-- Switch to PostgreSQL by setting `DATABASE_URL` to a PostgreSQL connection string.
-- Replace the default `SECRET_KEY` and admin credentials.
-- Put the Flask app behind Gunicorn or Waitress plus a reverse proxy that supports WebSockets.
-- Store `dataset/`, `encodings/`, and `attendance/` on persistent volumes in deployment.
-- For higher throughput, move recognition to a worker process or GPU-enabled service and keep the same WebSocket contract.
+npm install
 
-## API Highlights
+copy .env.example .env
 
-- `POST /api/auth/login`
-- `GET /api/system/overview`
-- `POST /api/persons`
-- `POST /api/persons/:id/images`
-- `POST /api/encodings/rebuild`
-- `GET /api/attendance/history`
-- `GET /api/analytics/summary`
-- `WS /ws/events`
-- `WS /ws/recognition`
+npm run dev
+```
 
-## Important Notes
+🌐 Frontend runs on: `http://localhost:5173`
 
-- The backend relies on `face_recognition`, which requires native dependencies. On Windows, install the required Visual C++ build tools and CMake/dlib prerequisites if needed.
-- This sandbox did not have Python installed, so runtime execution was not validated here. The codebase was assembled and checked structurally, but you should run the install and start commands locally to complete verification.
+---
+
+## 🧪 First Run Workflow  
+
+1. Start backend and frontend  
+2. Login with admin account  
+3. Go to Dataset page  
+4. Add employee details  
+5. Click **Auto Capture** 📸  
+6. Save person  
+7. Click **Rebuild Encodings**  
+8. Start scan from dashboard  
+9. 🎉 Attendance will be marked automatically  
+
+---
+
+## 📡 API Highlights  
+
+```
+POST   /api/auth/login
+GET    /api/system/overview
+POST   /api/persons
+POST   /api/encodings/rebuild
+GET    /api/attendance/history
+GET    /api/analytics/summary
+WS     /ws/events
+WS     /ws/recognition
+```
+
+<p align="center">
+  💡 Built for real-world AI deployment • Smart • Fast • Scalable
+</p>
